@@ -6,7 +6,9 @@ import BackButton from "../../UI/BackButton";
 import Input from "../../UI/Input";
 
 export default function Skills() {
+  const { detail } = useContext(Context);
   const { updateSkills } = useContext(Context);
+
   const [skillsList, setSkillsList] = useState([""]);
   const [nextDisabled, setNextDisabled] = useState(true);
 
@@ -33,7 +35,7 @@ export default function Skills() {
   return (
     <div>
       <BackButton to={"/objective"} />
-      <p className="text-xl font-semibold mb-8">Skills</p>
+      <p className="mb-8 text-xl font-semibold">Skills</p>
       <form onSubmit={submitHandler}>
         {skillsList.map((skill, i) => {
           return (
@@ -46,6 +48,7 @@ export default function Skills() {
                 htmlFor={`skill${i}`}
                 key={i}
                 required
+                defaultValue={detail.skills[i]}
                 onChange={(e) => changeHandler(i, e)}
               />
             </>
@@ -54,13 +57,13 @@ export default function Skills() {
         {skillsList.length < 3 ? (
           <Button onClick={addClickHandler}>+</Button>
         ) : (
-          <div className="flex justify-between w-full">
+          <div className="flex w-full justify-between">
             <Button>Save</Button>
             {nextDisabled ? (
               <Button disabled={"disabled"}>Next</Button>
             ) : (
               <Button>
-                <Link to="/skill">Next</Link>
+                <Link to="/work-experience">Next</Link>
               </Button>
             )}
           </div>

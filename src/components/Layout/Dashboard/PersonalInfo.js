@@ -1,11 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { Context } from "../../../Store.js";
-
 import Input from "../../UI/Input.js";
 import Button from "../../UI/Button.js";
-// import PersonalInfoContext from "../../../Context/PersonalInfoContext.js";
 
 const PersonalInfo = () => {
   const [name, setName] = useState("");
@@ -13,7 +10,7 @@ const PersonalInfo = () => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
 
-  const { state } = useContext(Context);
+  const { detail } = useContext(Context);
   const { updatePersonalInfo } = useContext(Context);
 
   const [nextDisabled, setNextDisabled] = useState(true);
@@ -51,7 +48,7 @@ const PersonalInfo = () => {
 
   return (
     <div>
-      <p className="text-xl font-semibold mb-8">Personal Information</p>
+      <p className="mb-8 text-xl font-semibold">Personal Information</p>
       <form onSubmit={submitHandler}>
         <label>Name</label>
         <Input
@@ -60,7 +57,8 @@ const PersonalInfo = () => {
           placeholder={"name"}
           id={"name"}
           onChange={nameChange}
-          value={state.personalInfo.name}
+          defaultValue={detail.personalInfo.name}
+          required
         />
         <label>Number</label>
         <Input
@@ -69,7 +67,8 @@ const PersonalInfo = () => {
           placeholder={"number"}
           id={"number"}
           onChange={numberChange}
-          value={state.personalInfo.number}
+          defaultValue={detail.personalInfo.number}
+          required
         />
         <label>Email</label>
         <Input
@@ -78,7 +77,8 @@ const PersonalInfo = () => {
           placeholder={"email"}
           id={"email"}
           onChange={emailChange}
-          value={state.personalInfo.email}
+          defaultValue={detail.personalInfo.email}
+          required
         />
         <label>Address</label>
         <Input
@@ -87,9 +87,10 @@ const PersonalInfo = () => {
           placeholder={"address"}
           id={"address"}
           onChange={addressChange}
-          value={state.personalInfo.address}
+          defaultValue={detail.personalInfo.address}
+          required
         />
-        <div className="flex justify-between w-full">
+        <div className="flex w-full justify-between">
           <Button nextDisabled={nextDisabled}>Save</Button>
           {nextDisabled ? (
             <Button disabled={"disabled"}>Next</Button>

@@ -1,10 +1,10 @@
 import React from "react";
 
-const Button = ({ ...restProps }) => {
+const Button = ({ nextDisabled, ...restProps }) => {
   return (
     <>
       <button
-        className="text-white w-24 p-2 rounded-full bg-blue-500"
+        className="w-24 rounded-full bg-blue-500 p-2 text-white"
         {...restProps}
       ></button>
     </>
