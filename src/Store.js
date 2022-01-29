@@ -3,26 +3,42 @@ import React, { useState } from "react";
 export const Context = React.createContext();
 
 const Store = ({ children }) => {
-  const [state, setState] = useState({
+  const [detail, setDetail] = useState({
     personalInfo: {},
     objective: "",
     skills: [],
+    workExperience: {},
+    education: {},
   });
-  console.log(state.skills);
 
   function updatePersonalInfo(data) {
-    return setState({ ...state, personalInfo: data });
+    return setDetail({ ...detail, personalInfo: data });
   }
 
   function updateObjective(data) {
-    return setState({ ...state, objective: data });
+    return setDetail({ ...detail, objective: data });
   }
 
   function updateSkills(data) {
-    return setState({ ...state, skills: data });
+    return setDetail({ ...detail, skills: data });
   }
 
-  const value = { state, updatePersonalInfo, updateObjective, updateSkills };
+  function updateWorkExperience(data) {
+    return setDetail({ ...detail, workExperience: data });
+  }
+
+  function updateEducation(data) {
+    return setDetail({ ...detail, education: data });
+  }
+
+  const value = {
+    detail,
+    updatePersonalInfo,
+    updateObjective,
+    updateSkills,
+    updateWorkExperience,
+    updateEducation,
+  };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
