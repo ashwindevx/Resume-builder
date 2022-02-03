@@ -6,20 +6,27 @@ import BackButton from "../../UI/BackButton";
 import Input from "../../UI/Input";
 
 export default function Skills() {
-  const { detail } = useContext(Context);
-  const { updateSkills } = useContext(Context);
+  // const { detail } = useContext(Context);
+  // const { updateSkills } = useContext(Context);
 
-  const [skillsList, setSkillsList] = useState([""]);
+  const { updateSkills, detail } = useContext(Context);
+
+  const [skillsList, setSkillsList] = useState([""]); // state containing an empty array
   const [nextDisabled, setNextDisabled] = useState(true);
 
+  // * since skills is managing the array for the input we have to figure out a way to get rid of skillList state and only use skills array for onChange
+
   const changeHandler = (i, e) => {
-    let skills = [...skillsList];
-    skills[i] = e.target.value;
-    setSkillsList(skills);
+    let skills = [...skillsList]; // spreading skillsList
+    skills[i] = e.target.value; // adding input value based on i to skills array
+    setSkillsList(skills); // passing skills array to skillsList state
+    // console.log(skills);
+    // console.log(skillsList);
   };
 
   const addClickHandler = () => {
     let isNotEmpty = skillsList.every((skill) => !!skill);
+    // console.log(isNotEmpty);
     if (skillsList.length >= 3 || !isNotEmpty) {
       return;
     }

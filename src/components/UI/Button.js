@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ nextDisabled, ...restProps }) => {
+const Button = ({ ...restProps }) => {
   return (
     <>
       <button
