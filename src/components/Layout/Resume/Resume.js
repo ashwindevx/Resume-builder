@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import ResumeActions from "./ResumeActions.js";
 
 import { Context } from "../../../Store.js";
-import moment from "moment";
 
 const Resume = () => {
   const {
@@ -70,15 +69,15 @@ const Resume = () => {
             <p className="pb-2 text-2xl font-bold">Education</p>
             <div>
               <span className="text-xl font-medium">
-                {education.schoolName},{" "}
+                {education.schoolName ? education.schoolName + `,` : ""}{" "}
               </span>
               <span className="text-md">
-                {education.city}, {education.state}
+                {education.city ? education.city + `,` : ""} {education.state}
               </span>
             </div>
             <p className="text-md">{education.degree}</p>
             <p className="text-md">
-              ({education.startDate} - {education.endDate})
+              ({education.startDateVal} - {education.endDateVal})
             </p>
           </div>
         ) : null}

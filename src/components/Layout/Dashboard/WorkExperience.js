@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../../Store.js";
 import Input from "../../UI/Input.js";
@@ -6,7 +6,6 @@ import Button from "../../UI/Button.js";
 import BackButton from "../../UI/BackButton.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useEffect } from "react/cjs/react.development";
 import moment from "moment";
 
 const WorkExperience = () => {
@@ -52,8 +51,6 @@ const WorkExperience = () => {
         .utc(JSON.stringify(endDate).replace(/["]+/g, ""))
         .format("MMM Do, YYYY"),
     });
-
-    console.log(workExperience.startDateVal, workExperience.endDateVal);
   };
 
   useEffect(() => {

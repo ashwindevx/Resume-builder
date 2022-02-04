@@ -1,73 +1,124 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../../Store.js";
 import Input from "../../UI/Input.js";
 import Button from "../../UI/Button.js";
 import BackButton from "../../UI/BackButton.js";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
+
 const Education = () => {
-  const [schoolName, setSchoolName] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [degree, setDegree] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  // const [schoolName, setSchoolName] = useState("");
+  // const [city, setCity] = useState("");
+  // const [state, setState] = useState("");
+  // const [degree, setDegree] = useState("");
+  // const [startDate, setStartDate] = useState("");
+  // const [endDate, setEndDate] = useState("");
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const [nextDisabled, setNextDisabled] = useState(true);
 
-  const { detail } = useContext(Context);
-  const { updateEducation } = useContext(Context);
+  const {
+    detail: { education },
+    updateEducation,
+  } = useContext(Context);
 
-  const schoolNameChange = (e) => {
-    setSchoolName(e.target.value);
+  const startDateChange = (date, e) => {
+    setStartDate(date);
+    // console.log(e);
   };
 
-  const cityChange = (e) => {
-    setCity(e.target.value);
+  const endDateChange = (date, e) => {
+    setEndDate(date);
+    // console.log(e.target);
   };
 
-  const stateChange = (e) => {
-    setState(e.target.value);
-  };
+  const onEducationChange = (e) => {
+    let inputId = e.target.id;
+    let value = e.target.value;
 
-  const degreeChange = (e) => {
-    setDegree(e.target.value);
-  };
-
-  const startDateChange = (e) => {
-    setStartDate(e.target.value);
-  };
-
-  const endDateChange = (e) => {
-    setEndDate(e.target.value);
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
     updateEducation({
-      schoolName: schoolName,
-      city: city,
-      state: state,
-      degree: degree,
-      startDate: startDate,
-      endDate: endDate,
+      ...education,
+      [inputId]: value,
+      startDateVal: moment
+        .utc(JSON.stringify(startDate).replace(/["]+/g, ""))
+        .format("MMM Do, YYYY"),
+      endDateVal: moment
+        .utc(JSON.stringify(endDate).replace(/["]+/g, ""))
+        .format("MMM Do, YYYY"),
     });
-    setNextDisabled(false);
   };
+
+  useEffect(() => {
+    const { schoolName, city, state, degree, startDate, endDate } = education;
+    if (schoolName && city && state && degree && startDate && endDate) {
+      setNextDisabled(false);
+    } else {
+      setNextDisabled(true);
+    }
+  }, [
+    education.schoolName,
+    education.city,
+    education.state,
+    education.degree,
+    education.startDate,
+    education.endDate,
+  ]);
+
+  // const schoolNameChange = (e) => {
+  //   setSchoolName(e.target.value);
+  // };
+
+  // const cityChange = (e) => {
+  //   setCity(e.target.value);
+  // };
+
+  // const stateChange = (e) => {
+  //   setState(e.target.value);
+  // };
+
+  // const degreeChange = (e) => {
+  //   setDegree(e.target.value);
+  // };
+
+  // const startDateChange = (e) => {
+  //   setStartDate(e.target.value);
+  // };
+
+  // const endDateChange = (e) => {
+  //   setEndDate(e.target.value);
+  // };
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   updateEducation({
+  //     schoolName: schoolName,
+  //     city: city,
+  //     state: state,
+  //     degree: degree,
+  //     startDate: startDate,
+  //     endDate: endDate,
+  //   });
+  //   setNextDisabled(false);
+  // };
 
   return (
     <div>
       <BackButton to={"/work-experience"} />
       <p className="mb-8 text-xl font-semibold">Education</p>
-      <form onSubmit={submitHandler}>
+      <form>
         <label>School Name</label>
         <Input
           html={"schoolName"}
           type={"text"}
           placeholder={"school name"}
           id={"schoolName"}
-          onChange={schoolNameChange}
-          defaultValue={detail.education.name}
+          onChange={onEducationChange}
+          defaultValue={education.name}
           required
         />
         <label>City</label>
@@ -76,8 +127,8 @@ const Education = () => {
           type={"text"}
           placeholder={"city"}
           id={"city"}
-          onChange={cityChange}
-          defaultValue={detail.education.number}
+          onChange={onEducationChange}
+          defaultValue={education.number}
           required
         />
         <label>State</label>
@@ -86,8 +137,8 @@ const Education = () => {
           type={"text"}
           placeholder={"state"}
           id={"state"}
-          onChange={stateChange}
-          defaultValue={detail.education.address}
+          onChange={onEducationChange}
+          defaultValue={education.address}
           required
         />
         <label>Degree</label>
@@ -96,35 +147,39 @@ const Education = () => {
           type={"text"}
           placeholder={"degree"}
           id={"degree"}
-          onChange={degreeChange}
-          defaultValue={detail.education.address}
+          onChange={onEducationChange}
+          defaultValue={education.address}
           required
         />
-        <label>Start Date: </label>
-        <Input
-          html={"startDate"}
-          id={"startDate"}
-          type={"date"}
+        <label>Start Date:</label>
+        <DatePicker
+          placeholderText="Start Date"
+          selected={startDate}
+          dateFormat={"dd/MM/yy"}
           onChange={startDateChange}
-          required
+          selectsStart
+          startDate={startDate} //selects date in startDate
+          endDate={endDate}
+          maxDate={new Date()}
+          className="my-2 mb-4 rounded-lg border-2 border-gray-300 p-2"
         />
-        <label>End Date: </label>
-        <Input
-          html={"endDate"}
-          id={"endDate"}
-          type={"date"}
+        <label>End Date:</label>
+        <DatePicker
+          placeholderText="End Date"
+          selected={endDate}
+          dateFormat={"dd/MM/yy"}
           onChange={endDateChange}
-          required
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          minDate={startDate}
+          maxDate={new Date()}
+          className="my-2 mb-4 rounded-lg border-2 border-gray-300 p-2"
         />
         <div className="flex w-full justify-between">
-          <Button nextDisabled={nextDisabled}>Save</Button>
-          {nextDisabled ? (
-            <Button disabled={"disabled"}>Next</Button>
-          ) : (
-            <Button>
-              <Link to="/objective">Next</Link>
-            </Button>
-          )}
+          <a href={!nextDisabled ? "working" : "#"}>
+            <Button>Generate PDF</Button>
+          </a>
         </div>
       </form>
     </div>
