@@ -1,14 +1,13 @@
 import React, { useState, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import { Context } from "../../../Store.js";
+
 import Button from "../../UI/Button";
 import BackButton from "../../UI/BackButton";
 import Input from "../../UI/Input";
 
 export default function Skills() {
-  // const { detail } = useContext(Context);
-  // const { updateSkills } = useContext(Context);
-
   const { updateSkills, detail } = useContext(Context);
 
   const [skillsList, setSkillsList] = useState([""]); // state containing an empty array

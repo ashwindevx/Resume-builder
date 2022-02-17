@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
-import ResumeActions from "./ResumeActions.js";
 
 import { Context } from "../../../Store.js";
+
+import ResumePersonalInfo from "./ResumeInfo/ResumePersonalInfo.js";
+import ResumeActions from "./ResumeActions.js";
 
 const Resume = () => {
   const {
@@ -11,6 +13,14 @@ const Resume = () => {
   return (
     <div className="flex w-2/3 flex-col items-center justify-center bg-slate-100 p-4">
       <div className="w-595 h-842 bg-white shadow-xl shadow-gray-200">
+        {Object.keys(personalInfo).length ? (
+          <ResumePersonalInfo
+            name={personalInfo.name}
+            number={personalInfo.number}
+            email={personalInfo.email}
+            address={personalInfo.address}
+          />
+        ) : null}
         {/* personalInfo */}
         {Object.keys(personalInfo).length ? (
           <div

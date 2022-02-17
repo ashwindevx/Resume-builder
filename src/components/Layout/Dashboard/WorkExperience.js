@@ -1,26 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import { Context } from "../../../Store.js";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import moment from "moment";
+
 import Input from "../../UI/Input.js";
 import Button from "../../UI/Button.js";
 import BackButton from "../../UI/BackButton.js";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
 
 const WorkExperience = () => {
-  // const [jobTitle, setJobTitle] = useState("");
-  // const [companyName, setCompanyName] = useState("");
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
-
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
   const [nextDisabled, setNextDisabled] = useState(true);
-
-  // const { detail } = useContext(Context);
-  // const { updateWorkExperience } = useContext(Context);
 
   const {
     detail: { workExperience },
@@ -76,43 +72,6 @@ const WorkExperience = () => {
     workExperience.startDateVal,
     workExperience.endDateVal,
   ]);
-
-  // const jobTitleChange = (e) => {
-  //   setJobTitle(e.target.value);
-  // };
-
-  // const companyNameChange = (e) => {
-  //   setCompanyName(e.target.value);
-  // };
-
-  // const cityChange = (e) => {
-  //   setCity(e.target.value);
-  // };
-
-  // const stateChange = (e) => {
-  //   setState(e.target.value);
-  // };
-
-  // const startDateChange = (e) => {
-  //   setStartDate(e.target.value);
-  // };
-
-  // const endDateChange = (e) => {
-  //   setEndDate(e.target.value);
-  // };
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   updateWorkExperience({
-  //     jobTitle: jobTitle,
-  //     companyName: companyName,
-  //     city: city,
-  //     state: state,
-  //     startDate: startDate,
-  //     endDate: endDate,
-  //   });
-  //   setNextDisabled(false);
-  // };
 
   return (
     <div>

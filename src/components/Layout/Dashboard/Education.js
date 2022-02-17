@@ -1,22 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+
 import { Context } from "../../../Store.js";
-import Input from "../../UI/Input.js";
-import Button from "../../UI/Button.js";
-import BackButton from "../../UI/BackButton.js";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
-const Education = () => {
-  // const [schoolName, setSchoolName] = useState("");
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
-  // const [degree, setDegree] = useState("");
-  // const [startDate, setStartDate] = useState("");
-  // const [endDate, setEndDate] = useState("");
+import Input from "../../UI/Input.js";
+import Button from "../../UI/Button.js";
+import BackButton from "../../UI/BackButton.js";
 
+const Education = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -68,43 +62,6 @@ const Education = () => {
     education.startDate,
     education.endDate,
   ]);
-
-  // const schoolNameChange = (e) => {
-  //   setSchoolName(e.target.value);
-  // };
-
-  // const cityChange = (e) => {
-  //   setCity(e.target.value);
-  // };
-
-  // const stateChange = (e) => {
-  //   setState(e.target.value);
-  // };
-
-  // const degreeChange = (e) => {
-  //   setDegree(e.target.value);
-  // };
-
-  // const startDateChange = (e) => {
-  //   setStartDate(e.target.value);
-  // };
-
-  // const endDateChange = (e) => {
-  //   setEndDate(e.target.value);
-  // };
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   updateEducation({
-  //     schoolName: schoolName,
-  //     city: city,
-  //     state: state,
-  //     degree: degree,
-  //     startDate: startDate,
-  //     endDate: endDate,
-  //   });
-  //   setNextDisabled(false);
-  // };
 
   return (
     <div>

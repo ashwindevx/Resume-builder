@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import { Context } from "../../../Store.js";
 import { Link } from "react-router-dom";
 
@@ -6,17 +7,7 @@ import Button from "../../UI/Button.js";
 import BackButton from "../../UI/BackButton.js";
 
 const Objective = () => {
-  // const { detail } = useContext(Context);
-  // const { updateObjective } = useContext(Context);
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   updateObjective(objectiveText);
-  //   setNextDisabled(false);
-  // };
-
   const { updateObjective, detail } = useContext(Context);
-
   const [nextDisabled, setNextDisabled] = useState(true);
 
   const onObjectiveChange = (e) => {

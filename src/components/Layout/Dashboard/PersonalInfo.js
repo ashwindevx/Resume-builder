@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import { Context } from "../../../Store.js";
 
@@ -6,35 +7,6 @@ import Input from "../../UI/Input.js";
 import Button from "../../UI/Button.js";
 
 const PersonalInfo = () => {
-  // const [name, setName] = useState("");
-  // const [number, setNumber] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [address, setAddress] = useState("");
-
-  // const { detail } = useContext(Context);
-  // const { updateObjective } = useContext(Context);
-
-  // const nameChange = (e) => {
-  //   detail(e.target.value);
-  // };
-
-  // const numberChange = (e) => {
-  //   setNumber(e.target.value);
-  // };
-
-  // const emailChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
-
-  // const addressChange = (e) => {
-  //   setAddress(e.target.value);
-  // };
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log(nextDisabled);
-  // };
-
   // destructured both updatePersonalInfo fn & detail state in one statement
   const {
     updatePersonalInfo,
@@ -115,14 +87,6 @@ const PersonalInfo = () => {
           required
         />
         <div className="flex w-full justify-between">
-          {/* <Button nextDisabled={nextDisabled}>Save</Button>
-          {nextDisabled ? (
-            <Button>
-              <Link to="/objective">Next</Link>
-            </Button>
-          ) : (
-            <Button disabled={"disabled"}>Next</Button>
-          )} */}
           <Link to={!nextDisabled ? "/objective" : "#"}>
             <Button>Next</Button>
           </Link>
